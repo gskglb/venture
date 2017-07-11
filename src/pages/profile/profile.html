@@ -1,0 +1,39 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Manage Profile</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="logOut()">
+        <ion-icon name="log-out"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+<div class="rpic">
+  <img *ngIf="avatar" src={{avatar}} />
+</div>
+<div class="rpic">
+  <img *ngIf="!avatar" src="https://dummyimage.com/600x400/000/fff" />
+</div>
+<div>
+  <button ion-button round outline color="primary" (click)="editImage()">Set Profile Image</button>
+</div>
+<div class="spacer" style="height: 50px;"></div>
+<div *ngIf="userProfile?.firstName || userProfile?.lastName" (click)="editName()">
+  <h2> {{userProfile?.firstName}} {{userProfile?.lastName}}</h2>
+</div>
+<div *ngIf="!userProfile?.firstName" (click)="editName()" >
+  <h2> Tap here to edit your name</h2>
+</div>
+<div class="spacer" style="height: 50px;"></div>
+<div>
+  <button ion-button round outline color="danger" (click)="logOut()">Logout</button>
+</div>
+
+</ion-content>

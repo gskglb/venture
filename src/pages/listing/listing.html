@@ -1,0 +1,30 @@
+<!--
+  Generated template for the ListingPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{passedCategory}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <!-- List Code -->
+  <ion-list [virtualScroll]="ideas" approxItemHeight="50px">
+
+    <ion-item *virtualItem="let idea" (click)="ideaTapped($event, idea)">
+        <ion-thumbnail item-start>
+          <img [src]="idea.imageUrl">
+        </ion-thumbnail>
+        <h2>{{ idea.title }}</h2>
+        <p>{{ idea.description }}</p>
+    </ion-item>
+
+  </ion-list>
+  <!-- End of List Code -->
+</ion-content>

@@ -1,0 +1,20 @@
+page-details {
+  .scroll-content {
+    background-color: $white;
+    //background-image: url('../assets/img/backgrounds/bg.jpg');
+  }
+  .background_image_header {
+    background-image: url('../assets/img/backgrounds/details.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  .headline {
+    color: $white;
+  }
+  .item__content {
+    margin: 0;
+  }
+  p {
+    margin: 0;
+  }
+}
