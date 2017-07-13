@@ -15,45 +15,23 @@
         <ion-icon name="log-in"></ion-icon>
        </button>
     </ion-buttons>    
-
+     
   </ion-navbar>
-
 </ion-header>
 
 
 <ion-content padding>
   <!-- List Code -->
-  <ion-list [virtualScroll]="ideas" style="width: 100%" no-lines>
-    <div *virtualItem="let idea">
-      <ion-card>
-        <ion-item>
-          <ion-avatar item-start>
-            <img [src]=idea.imageUrl >
-          </ion-avatar>
-          <h4>
-            Looking for investing of $100k 
-          </h4>
-          <p>
-            IT Consulting Startup 
-          </p>
-        </ion-item>
-          
-        <ion-card-content>
-          <p>
-            {{idea.title}}
-          </p>
-          <hr />
-          <p>
-            {{idea.description}}
-          </p>
-          <button ion-button block clear (click)="ideaTapped($event, idea)">View Details</button>
-          
-        </ion-card-content>      
-      </ion-card>
+  <ion-list [virtualScroll]="ideas" approxItemHeight="50px">
 
-      <div style="height:5px"></div>
-    </div>
-    
+    <ion-item *virtualItem="let idea" style="width: 100%" (click)="ideaTapped($event, idea)">
+        <ion-thumbnail item-start>
+          <img [src]="idea.imageUrl">
+        </ion-thumbnail>
+        <h2>{{ idea.title }}</h2>
+        <p>{{ idea.description }}</p>
+    </ion-item>
+    <div style="height:10px"></div>
   </ion-list>
   <!-- End of List Code -->
 

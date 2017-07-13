@@ -6,8 +6,7 @@ import { MyApp } from './app.component';
 import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
-import { TabsPage } from '../pages/tabs/tabs';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 import { IonicStorageModule } from '@ionic/storage';
@@ -20,6 +19,8 @@ import { ProfileProvider } from '../providers/profile/profile';
 import { HttpModule } from '@angular/http';
 import { Camera } from '@ionic-native/camera';
 import { IdeaListingProvider } from '../providers/idea-listing/idea-listing';
+
+import { SocialSharing } from '@ionic-native/social-sharing';
 
 export class CameraMock extends Camera {
 // getPicture(options){
@@ -38,12 +39,13 @@ export class CameraMock extends Camera {
     AboutPage,
     ContactPage,
     HomePage,
-    TabsPage,
+    
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(),
+    BrowserAnimationsModule,
     HttpModule,
   ],
   bootstrap: [IonicApp],
@@ -52,7 +54,6 @@ export class CameraMock extends Camera {
     AboutPage,
     ContactPage,
     HomePage,
-    TabsPage,
   ],
   providers: [
     StatusBar,
@@ -62,7 +63,8 @@ export class CameraMock extends Camera {
     AuthProvider,
     UserDataProvider,
     ProfileProvider,
-    IdeaListingProvider
+    IdeaListingProvider,
+    SocialSharing
   ]
 })
 export class AppModule {}

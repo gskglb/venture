@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>create</ion-title>
+    <ion-title>Create Awesome Idea</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -15,4 +15,17 @@
 
 <ion-content padding>
 
+
+  <form [formGroup]="ideaCreateForm" (submit)="createIdea()" novalidate>
+
+    <ion-item>
+      <ion-label stacked>Summary of your idea</ion-label>
+      <ion-input formControlName="title" type="text" [class.invalid]="!ideaCreateForm.controls.title.valid && ideaCreateForm.controls.title.dirty">
+      </ion-input>
+    </ion-item>
+
+    <button ion-button block type="submit" [disabled]="!ideaCreateForm.valid">
+      Create your awesome idea
+    </button>
+  </form>
 </ion-content>

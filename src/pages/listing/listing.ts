@@ -30,7 +30,7 @@ export class ListingPage {
 
 	ionViewDidLoad() {
 		let loader = this.loadingCtrl.create({
-      		content: "Getting farm fresh ideas... hang on"
+      		content: "Getting fresh ideas just for you..."
     	});
     	loader.present();
     	this.ideaProvider.getFreshIdeas().then(data => {
@@ -44,6 +44,16 @@ export class ListingPage {
 		this.navCtrl.push("details", {
 			item:idea
 		});
+	}
+	newTapped($event, idea) {
+		this.navCtrl.push('create'); 
+	}
+	goToLogIn(){ 
+		this.navCtrl.push('sign-in'); 
+	}
+
+	goToProfile(){ 
+		this.navCtrl.push('profile'); 
 	}
 
 }

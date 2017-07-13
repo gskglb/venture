@@ -5,29 +5,89 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
   <ion-navbar>
-    <ion-title>{{passedIdea.title}}</ion-title>
+    <ion-title>An Awesome Idea in detail</ion-title>
   </ion-navbar>
-
 </ion-header>
 
 
 <ion-content padding>
+  <ion-fab top right >
+    <button ion-fab class="pop-in" color="danger">Share</button>
+    <ion-fab-list side="bottom">
+      <button ion-fab color="primary" (click)="facebookShare()">
+        <ion-icon  name="logo-facebook"></ion-icon>
+      </button>
+      <button ion-fab color="secondary" (click)="whatsappShare()">
+        <ion-icon name="logo-whatsapp"></ion-icon>
+      </button>
+    </ion-fab-list>
+    <ion-fab-list side="left">
+      <button ion-fab (click)="smsShare()">
+        <ion-icon name="send"></ion-icon>
+      </button>
+    </ion-fab-list>
+  </ion-fab>
+  <ion-card>
+    <img [src]=passedIdea.imageUrl>
+  </ion-card>
+  <ion-card-content>
+    <p>
+      {{passedIdea.title}}
+    </p>
+    <hr />
+      {{passedIdea.description}}
+      <hr />
+      <button ion-button block (click)="newTapped()">Do you have any idea?</button>
+  </ion-card-content>
+<ion-list no-lines>
+  <ion-list-header>
+    Some more details
+  </ion-list-header>
+  <ion-item>
+    <ion-label>Liked By</ion-label>
+    <ion-note item-end>200 Awesome people like you</ion-note>
+  </ion-item>  
+  <ion-item>
+    <ion-label>Posted By</ion-label>
+    <ion-note item-end>gururaj</ion-note>
+  </ion-item>
+  <ion-item>
+    <ion-label>Posted On</ion-label>
+    <ion-note item-end>Few moments ago</ion-note>
+  </ion-item>  
+  <ion-item>
+    <ion-label>Posted On</ion-label>
+    <ion-note item-end>Few moments ago</ion-note>
+  </ion-item>  
+  <button ion-item>
+    <ion-label>Love the idea?</ion-label>
+    <ion-note item-end>Tap here to cast your vote</ion-note>
+  </button>
+  <button ion-item>
+    <ion-label>Want so connect with owner?</ion-label>
+    <ion-note item-end>Tap here (sign in reuired)</ion-note>
+  </button>
+</ion-list>
+<ion-list>
+  <ion-list-header>
+    This awesome idea needs
+  </ion-list-header>
+  <button ion-item>
+    <ion-label>Investors</ion-label>
+    <ion-note item-end>Interested?</ion-note>
+  </button>
+  <button ion-item>
+    <ion-label>Service Providers</ion-label>
+    <ion-note item-end>Are you ready?</ion-note>
+  </button>
+  <button ion-item>
+    <ion-label>Others</ion-label>
+    <ion-note item-end>See details</ion-note>
+  </button>
 
-<div class="background_image_header text-center">
+</ion-list>
 
-      <br>
-
-      <!-- Item title -->
-      <h3 class="headline">
-        {{ passedIdea.title }}
-      </h3>
-      <!-- End of Item title -->
-
-      <br>
-
-
-    </div>
-
+   
 </ion-content>
+

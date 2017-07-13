@@ -1,83 +1,35 @@
-<ion-header>
-  <ion-navbar color="primary">
-    <ion-title>Home</ion-title>
-    <ion-buttons end>
-      <button ion-button icon-only (click)="goToProfile()" *ngIf="isLoggedIn">
-        <ion-icon name="person"></ion-icon>
-       </button>
-      <button ion-button icon-only (click)="goToLogIn()" *ngIf="!isLoggedIn">
-        <ion-icon name="log-in"></ion-icon>
-       </button>
-    </ion-buttons>    
-     
-  </ion-navbar>
-</ion-header>
+<ion-content>
+  <ion-slides pager (ionSlideDidChange)="slideChanged()" (ionSlideDrag)="slideMoved()">
 
-<ion-content padding>
+    <ion-slide>
+      <div class="diag" style="background: url('assets/img/bg1.jpg') no-repeat">
+        <ion-icon ios="ios-analytics" md="md-analytics" color="primary" [@bounce]='state' (@bounce.done)="animationDone($event)"></ion-icon>
+      </div>
+      <div [@bounce]='state'>
+        <h2>Have an awesome idea?</h2>
+        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+      </div>
+    </ion-slide>
 
+    <ion-slide>
+      <div class="diag" style="background: url('assets/img/whitebg.svg') no-repeat">
+        <ion-icon ios="ios-trophy" md="md-trophy" color="primary" [@bounce]='state' (@bounce.done)="animationDone($event)"></ion-icon>
+      </div>
+      <div [@bounce]='state'>
+        <h2>something more</h2>
+        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
+      </div>
+    </ion-slide>
 
-    <ion-row>
-        <ion-col>
-          <div class="padding_helper" color="white" (click)="freshIdeasTapped()">
-            <div class="category__image">
-                <div class="text-center image__padding">
-                  <p class="section__headline">
-                      Just out of someone's mind
-                  </p>
-                  <p class="nomargin category__headline">
-                      Fresh ideas 
-                  </p>
-                </div>
-            </div>
-          </div>          
-        </ion-col>
-        <ion-col>
-          <div class="padding_helper" color="white" (click)="freshIdeasTapped()">
-            <div class="category__image">
-                <div class="text-center image__padding">
-                  <p class="section__headline">
-                      Just out of someone's mind
-                  </p>
-                  <p class="nomargin category__headline">
-                      Fresh ideas 
-                  </p>
-                </div>
-            </div>
-          </div>          
-        </ion-col>
-    </ion-row>
-
-  <!-- Beginning of the category card -->
-
-  <!-- End of the category card -->
-
-  <!-- Beginning of the category card -->
-  <div class="padding_helper" color="white" (click)="mostLikedIdeasTapped()">
-    <div class="category__image2">
-        <div class="text-center image__padding">
-          <p class="section__headline">
-              Liked by hundred of people
-          </p>
-          <p class="nomargin category__headline">
-              Most liked ideas
-          </p>
-        </div>
-    </div>
-  </div>
-  <!-- End of the category card -->
-
-  <!-- Beginning of the category card -->
-  <div class="padding_helper" color="white" (click)="editorChoiseTapped()">
-    <div class="category__image3">
-        <div class="text-center image__padding">
-          <p class="section__headline">
-              Handpicked by our editor
-          </p>
-          <p class="nomargin category__headline">
-              Editor's ideas
-          </p>
-        </div>
-    </div>
-  </div>
-  <!-- End of the category card -->
+    <ion-slide>
+      <div class="diag" style="background: url('assets/img/whitebg.svg') no-repeat">
+        <ion-icon ios="ios-chatboxes" md="md-chatboxes" color="primary" [@bounce]='state' (@bounce.done)="animationDone($event)"></ion-icon>
+      </div>
+      <div [@bounce]='state'>
+        <h2>something else</h2>
+        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
+      </div>
+    </ion-slide>
+  </ion-slides>
+  <button (click)="skip()" id="skip">{{ skipMsg }}</button>
 </ion-content>
