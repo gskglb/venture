@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { IdeaListingProvider } from '../../providers/idea-listing/idea-listing';
-
+import { UserDataProvider } from '../../providers/user-data/user-data';
 /**
  * Generated class for the ListingPage page.
  *
@@ -19,13 +19,18 @@ export class ListingPage {
 
 	passedCategory:any;
 	ideas:any;
-
+	public isLoggedIn: any = false;	
 	constructor(
 		public navCtrl: NavController, 
 		public navParams: NavParams,
 		public ideaProvider: IdeaListingProvider,
-		public loadingCtrl: LoadingController) {
+		public loadingCtrl: LoadingController,
+		public userDataProvider: UserDataProvider) {
 			this.passedCategory = this.navParams.get('category');
+			userDataProvider.hasLoggedIn().then((hasLoggedIn) => {
+				console.log(hasLoggedIn);
+			   	this.isLoggedIn = hasLoggedIn;
+			});			
 	}
 
 	ionViewDidLoad() {

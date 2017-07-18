@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 
-import { AboutPage } from '../pages/about/about';
+
 import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -21,6 +21,7 @@ import { Camera } from '@ionic-native/camera';
 import { IdeaListingProvider } from '../providers/idea-listing/idea-listing';
 
 import { SocialSharing } from '@ionic-native/social-sharing';
+import { ReferenceDataProvider } from '../providers/reference-data/reference-data';
 
 export class CameraMock extends Camera {
 // getPicture(options){
@@ -36,7 +37,6 @@ export class CameraMock extends Camera {
 @NgModule({
   declarations: [
     MyApp,
-    AboutPage,
     ContactPage,
     HomePage,
     
@@ -51,7 +51,6 @@ export class CameraMock extends Camera {
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    AboutPage,
     ContactPage,
     HomePage,
   ],
@@ -64,7 +63,8 @@ export class CameraMock extends Camera {
     UserDataProvider,
     ProfileProvider,
     IdeaListingProvider,
-    SocialSharing
+    SocialSharing,
+    ReferenceDataProvider
   ]
 })
 export class AppModule {}

@@ -22,8 +22,11 @@ import { HomePage } from '../home/home';
 export class SignUpPage {
   public signupForm: FormGroup;
   loading: Loading;
-  constructor(public navCtrl: NavController, public authProvider: AuthProvider,
-    public formBuilder: FormBuilder, public loadingCtrl: LoadingController, 
+  constructor(
+    public navCtrl: NavController, 
+    public authProvider: AuthProvider,
+    public formBuilder: FormBuilder, 
+    public loadingCtrl: LoadingController, 
     public alertCtrl: AlertController) {
 
       this.signupForm = formBuilder.group({

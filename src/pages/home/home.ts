@@ -1,5 +1,5 @@
 import { NavController } from 'ionic-angular';
-import { UserDataProvider } from '../../providers/user-data/user-data';
+
 import { ViewChild } from '@angular/core';
 import { Slides } from 'ionic-angular';
 import { Component, trigger, transition, style, state, animate, keyframes } from '@angular/core';
@@ -28,17 +28,14 @@ import { Component, trigger, transition, style, state, animate, keyframes } from
 })
 export class HomePage {
 	@ViewChild(Slides) slides: Slides;
-	public isLoggedIn: any = false;	
+	
 	public skipMsg: string = "Skip Intro";
 
 	constructor(
 		public navCtrl: NavController,
-		public userDataProvider: UserDataProvider,) {
+		) {
 
-		userDataProvider.hasLoggedIn().then((hasLoggedIn) => {
-			console.log(hasLoggedIn);
-		   	this.isLoggedIn = hasLoggedIn;
-		});
+
 	}
 
 	goToLogIn(){ 

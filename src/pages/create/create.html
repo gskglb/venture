@@ -1,31 +1,80 @@
-<!--
-  Generated template for the CreatePage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-
   <ion-navbar>
     <ion-title>Create Awesome Idea</ion-title>
   </ion-navbar>
-
 </ion-header>
 
-
 <ion-content padding>
-
-
   <form [formGroup]="ideaCreateForm" (submit)="createIdea()" novalidate>
-
     <ion-item>
       <ion-label stacked>Summary of your idea</ion-label>
-      <ion-input formControlName="title" type="text" [class.invalid]="!ideaCreateForm.controls.title.valid && ideaCreateForm.controls.title.dirty">
-      </ion-input>
+      <ion-textarea formControlName="title" type="text" [class.invalid]="!ideaCreateForm.controls.title.valid && ideaCreateForm.controls.title.dirty" rows=3
+      placeholder="define problem that you think your idea will solve">
+      </ion-textarea>
     </ion-item>
+    <ion-item class="error-message" 
+      *ngIf="!ideaCreateForm.controls.title.valid  && ideaCreateForm.controls.title.dirty">
+      <p>Summary is required and max 100 chars</p>
+    </ion-item>    
 
-    <button ion-button block type="submit" [disabled]="!ideaCreateForm.valid">
-      Create your awesome idea
-    </button>
+    <ion-item>
+      <ion-label stacked>Description of your idea</ion-label>
+      <ion-textarea formControlName="description" type="text" [class.invalid]="!ideaCreateForm.controls.description.valid && ideaCreateForm.controls.description.dirty" rows=5
+      placeholder="explain the problem that you think your idea will solve and make sure to quote how part">
+      </ion-textarea>
+    </ion-item>
+    <ion-item class="error-message" 
+      *ngIf="!ideaCreateForm.controls.description.valid  && ideaCreateForm.controls.description.dirty">
+      <p>Description is required and can be upto 4000 chars</p>
+    </ion-item>  
+
+    <ion-item>
+      <ion-label stacked>Unique selling point (USP) </ion-label>
+      <ion-textarea formControlName="description" type="text" [class.invalid]="!ideaCreateForm.controls.description.valid && ideaCreateForm.controls.description.dirty" rows=5
+      placeholder="unique selling point (USP) is the factor that makes a company or a product stand out from its competitors, whether it is through pricing, quality, customer service or innovation."
+      >
+      </ion-textarea>
+    </ion-item>
+    <ion-item class="error-message" 
+      *ngIf="!ideaCreateForm.controls.description.valid  && ideaCreateForm.controls.description.dirty">
+      <p>Description is required and can be upto 4000 chars</p>
+    </ion-item>  
+
+    <ion-item>
+      <ion-label>Idea Stage (SWOT Analysis)</ion-label>
+      <ion-select multiple="true" formControlName="stage">
+        <ion-option *ngFor="let stage of ideaStages">{{stage}}</ion-option>
+      </ion-select>
+    </ion-item>     
+
+    <ion-item>
+      <ion-label>Category</ion-label>
+      <ion-select multiple="true" formControlName="category">
+        <ion-option *ngFor="let category of catagories">{{category}}</ion-option>
+      </ion-select>
+    </ion-item>     
+
+    <ion-item>
+      <ion-label>Idea needs</ion-label>
+      <ion-select multiple="true" formControlName="ideaNeeds">
+        <ion-option *ngFor="let needs of ideaNeeds">{{needs}}</ion-option>
+      </ion-select>
+    </ion-item>   
+
+    <ion-item>
+      <ion-label stacked>Additional details</ion-label>
+      <ion-textarea formControlName="remarks" type="text" [class.invalid]="!ideaCreateForm.controls.remarks.valid && ideaCreateForm.controls.remarks.dirty" rows=5>
+      </ion-textarea>
+    </ion-item>
+    <ion-item class="error-message" 
+      *ngIf="!ideaCreateForm.controls.remarks.valid  && ideaCreateForm.controls.remarks.dirty">
+      <p>Remarks can not be space</p>
+    </ion-item>  
+
+    <div style="padding:50px">
+      <button ion-button block type="submit" [disabled]="!ideaCreateForm.valid">
+        Create your awesome idea
+      </button>
+    </div>
   </form>
 </ion-content>
