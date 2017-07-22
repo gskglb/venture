@@ -1,4 +1,6 @@
-
+  ion-list{
+    background-color: $white;  
+  }
 
 .title-image {
     margin-top: 9px;
@@ -15,7 +17,7 @@
 // Page Styling
 // ----------------------------------------------------------------------------------
 .scroll-content {
-  background-color: $white;
+  background-color: $grey;
   //background-image: url('../assets/img/backgrounds/bg.jpg');
 }
 

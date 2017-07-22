@@ -1,7 +1,4 @@
 import { Component } from '@angular/core';
-
-import { AboutPage } from '../about/about';
-import { ContactPage } from '../contact/contact';
 import { IonicPage } from 'ionic-angular';
 @IonicPage({
 	name:"tabs"
@@ -12,8 +9,8 @@ import { IonicPage } from 'ionic-angular';
 export class TabsPage {
 
   tab1Root = "listing";
-  tab2Root = AboutPage;
-  tab3Root = ContactPage;
+  tab2Root = 'about';
+  tab3Root = 'contact';
 
   constructor() {
 

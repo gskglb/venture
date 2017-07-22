@@ -3,8 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 
-
-import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -37,9 +35,8 @@ export class CameraMock extends Camera {
 @NgModule({
   declarations: [
     MyApp,
-    ContactPage,
     HomePage,
-    
+
   ],
   imports: [
     BrowserModule,
@@ -51,8 +48,8 @@ export class CameraMock extends Camera {
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    ContactPage,
     HomePage,
+
   ],
   providers: [
     StatusBar,

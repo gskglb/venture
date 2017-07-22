@@ -1,39 +1,68 @@
 
 <ion-header>
-
   <ion-navbar>
-    <ion-title>Manage Profile</ion-title>
+    <ion-title>Profile</ion-title>
     <ion-buttons end>
       <button ion-button icon-only (click)="logOut()">
         <ion-icon name="log-out"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
-
 </ion-header>
-
-
 <ion-content>
 
-<div class="rpic">
-  <img *ngIf="avatar" src={{avatar}} />
+<ion-card>
+  <div  *ngIf="avatar">
+    <img src="{{avatar}}" (click)="editImage()"/>
+  </div>
+  <div *ngIf="!avatar">
+    <img src="https://dummyimage.com/600x400/000/fff" (click)="editImage()"/>
+  </div>  
+  <ion-card-content>
+    <ion-card-title>
+      <div *ngIf="userProfile?.firstName || userProfile?.lastName">
+        <h2> 
+            {{userProfile?.firstName}} {{userProfile?.lastName}}
+            &nbsp;
+              <ion-icon name="create" (click)="editName()"></ion-icon>
+          
+        </h2>
+      </div>
+      <div *ngIf="!userProfile?.firstName" (click)="editName()" >
+        <h3> Tap here to edit your name</h3>
+      </div>      
+    </ion-card-title>
+    <p>
+      The most popular industrial group ever, and largely
+      responsible for bringing the music to a mass audience.
+    </p>
+  </ion-card-content>
+</ion-card>
+<div style="padding:10px">
+<div *ngIf="complete">
+<div *ngIf="countOfMyIdeas > 0">
+  <ion-list>
+    <ion-list-header>
+      <h2>Edit Your Ideas</h2>
+    </ion-list-header>
+    <button ion-item *ngFor="let idea of myIdeas">
+      <ion-label>{{idea?.summary}}</ion-label>
+      <ion-note item-end>
+        <ion-icon name="arrow-forward"></ion-icon>
+      </ion-note>
+    </button>
+  </ion-list>
 </div>
-<div class="rpic">
-  <img *ngIf="!avatar" src="https://dummyimage.com/600x400/000/fff" />
+<div *ngIf="countOfMyIdeas == 0">
+  <ion-list>
+    <ion-list-header>
+      <h2>You have no ideas recorded yet</h2>
+    </ion-list-header>
+    <button ion-button block (click)="newIdea()">
+      Create your awesome idea
+    </button>
+  </ion-list>
+</div>  
 </div>
-<div>
-  <button ion-button round outline color="primary" (click)="editImage()">Set Profile Image</button>
 </div>
-<div class="spacer" style="height: 50px;"></div>
-<div *ngIf="userProfile?.firstName || userProfile?.lastName" (click)="editName()">
-  <h2> {{userProfile?.firstName}} {{userProfile?.lastName}}</h2>
-</div>
-<div *ngIf="!userProfile?.firstName" (click)="editName()" >
-  <h2> Tap here to edit your name</h2>
-</div>
-<div class="spacer" style="height: 50px;"></div>
-<div>
-  <button ion-button round outline color="danger" (click)="logOut()">Logout</button>
-</div>
-
 </ion-content>

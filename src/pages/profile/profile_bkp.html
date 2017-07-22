@@ -13,3 +13,25 @@
     <hr/>
   </div>    
 </ion-content>
+
+
+
+<figure class="snip1344">
+  
+  <div  *ngIf="avatar">
+  <img src="{{avatar}}" alt="profile-sample1" class="background"/>
+  <img src="{{avatar}}" alt="profile-sample1" class="profile" (click)="editImage()"/>
+  </div>
+  <div *ngIf="!avatar">
+    <img [src]=https://dummyimage.com/600x400/000/fff  class="background"/>
+    <img src="https://dummyimage.com/600x400/000/fff"  class="profile" (click)="editImage()"/>
+  </div>  
+  <figcaption>
+    <div *ngIf="userProfile?.firstName || userProfile?.lastName" (click)="editName()">
+      <h3> {{userProfile?.firstName}} {{userProfile?.lastName}}</h3>
+    </div>
+    <div *ngIf="!userProfile?.firstName" (click)="editName()" >
+      <h3> Tap here to edit your name</h3>
+    </div>
+  </figcaption>
+</figure>

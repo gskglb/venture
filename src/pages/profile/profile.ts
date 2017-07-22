@@ -1,10 +1,11 @@
 import { Component, NgZone } from '@angular/core';
-import { IonicPage, NavController, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, AlertController, LoadingController } from 'ionic-angular';
 import { ProfileProvider } from '../../providers/profile/profile';
 import { AuthProvider } from '../../providers/auth/auth';
 import { UserDataProvider } from '../../providers/user-data/user-data';
 import { Camera } from '@ionic-native/camera';
 import { HomePage } from '../home/home';
+import { IdeaListingProvider } from '../../providers/idea-listing/idea-listing';
 /**
  * Generated class for the ProfilePage page.
  *
@@ -25,7 +26,9 @@ export class ProfilePage {
   public birthDate: string;
   public avatar: string;
   public headerImage: "https://dummyimage.com/600x400/000/fff";
-
+  public myIdeas;
+  public countOfMyIdeas = 0;
+  public complete: boolean = false;
 
   constructor(
     public navCtrl: NavController, 
@@ -33,18 +36,29 @@ export class ProfilePage {
     public profileProvider: ProfileProvider, 
     public authProvider: AuthProvider, 
     public cameraPlugin: Camera,
-    public userDataProvider: UserDataProvider) {
+    public loadingCtrl: LoadingController,
+    public userDataProvider: UserDataProvider,
+    public ideaProvider: IdeaListingProvider) {
     this.zone = new NgZone({});
   }
 
-  ionViewWillEnter() {
+  ionViewDidLoad() {
+    let loader = this.loadingCtrl.create({
+      content: "Loading your profile..."
+    });
+    loader.present();
+    this.ideaProvider.getMyIdeas().then(data => {
+        this.myIdeas = data;
+        this.countOfMyIdeas = Object.keys(data).length;
+    });
+
     this.profileProvider.getUserProfile().then( profileSnap => {
       this.userProfile = profileSnap;
       this.zone.run(() => {
         this.avatar = this.userProfile.profileURL;
+        this.complete=true;
+        loader.dismiss();
       });
-      console.log(this.userProfile);
-      //this.birthDate = this.userProfile.birthDate;
     });    
   }
 

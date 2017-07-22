@@ -1,11 +1,35 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Fav
+      My Favorites
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-
+  <div *ngIf="complete">
+    <div *ngIf="countOfMyIdeas > 0">
+      <ion-list>
+        <ion-list-header>
+          <h2>Edit Your Ideas</h2>
+        </ion-list-header>
+        <button ion-item *ngFor="let idea of myIdeas">
+          <ion-label>{{idea?.summary}}</ion-label>
+          <ion-note item-end>
+            <ion-icon name="arrow-forward"></ion-icon>
+          </ion-note>
+        </button>
+      </ion-list>
+    </div>
+    <div *ngIf="countOfMyIdeas == 0">
+      <ion-list>
+        <ion-list-header>
+          <h2>You have no ideas recorded yet</h2>
+        </ion-list-header>
+        <button ion-button block (click)="newIdea()">
+          Create your awesome idea
+        </button>
+      </ion-list>
+    </div>  
+  </div>
 </ion-content>

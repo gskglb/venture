@@ -21,6 +21,25 @@ export class IdeaListingProvider {
     });
   }  
 
+  getMyIdeas(){
+    return new Promise( (resolve, reject) => {
+      let ref = firebase.database().ref('/ideas');
+      ref.orderByChild("createdBy").equalTo(firebase.auth().currentUser.uid).on("value", snapshot => {
+        let rawList = [];
+        snapshot.forEach( snap => {
+          rawList.push({
+            id: snap.key,
+            summary:snap.val().summary,
+            description:snap.val().description,
+
+          });
+        return false
+        });
+        resolve(rawList);
+      });
+    });
+  }  
+
   createIdea(
     summary:string,
     description:string,
