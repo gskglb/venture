@@ -1,5 +1,6 @@
 {
   "name": "venture",
-  "app_id": "",
-  "type": "ionic-angular"
+  "integrations": {},
+  "type": "ionic-angular",
+  "pro_id": "471e2c7b"
 }

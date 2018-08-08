@@ -46,7 +46,7 @@ export class IdeaListingProvider {
     stage: Array<string>, 
     category: Array<string>,
     ideaNeeds: Array<string>,
-    remarks: string) : firebase.Promise<any> {
+    remarks: string) : Promise<any> {
       let createdBy:string = firebase.auth().currentUser.uid;
       let status:string = "unpublished";
       let createdAt = firebase.database.ServerValue.TIMESTAMP;    

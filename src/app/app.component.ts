@@ -16,12 +16,12 @@ export class MyApp {
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
     
     firebase.initializeApp({
-        apiKey: "AIzaSyAWcOuQ4iNnPH0fjiGkVgHqr76vekhgh_8",
-        authDomain: "venture-b9a3e.firebaseapp.com",
-        databaseURL: "https://venture-b9a3e.firebaseio.com",
-        projectId: "venture-b9a3e",
-        storageBucket: "venture-b9a3e.appspot.com",
-        messagingSenderId: "651410299407"
+      apiKey: "AIzaSyCVdX0iNCBUUd08SQLJmCrWcgjKuo__q_s",
+      authDomain: "demoapp-gsk.firebaseapp.com",
+      databaseURL: "https://demoapp-gsk.firebaseio.com",
+      projectId: "demoapp-gsk",
+      storageBucket: "demoapp-gsk.appspot.com",
+      messagingSenderId: "708274529807"
     }); 
 
     platform.ready().then(() => {

@@ -14,22 +14,22 @@ export class AuthProvider {
 	constructor(public http: Http) {
 	}
 
-	loginUser(email: string, password: string) : firebase.Promise<any> {
+	loginUser(email: string, password: string) : Promise<any> {
 	 return firebase.auth().signInWithEmailAndPassword(email, password);
 	}
 
-	signupUser(email: string, password: string): firebase.Promise<any> {
+	signupUser(email: string, password: string): Promise<any> {
 	return firebase.auth().createUserWithEmailAndPassword(email, password)
 	.then( newUser => {
 	    firebase.database().ref('/userProfile').child(newUser.uid).set({ email: email });
 	});
 	}
 
-	resetPassword(email: string): firebase.Promise<void> {
+	resetPassword(email: string): Promise<void> {
 	return firebase.auth().sendPasswordResetEmail(email);
 	}
 
-	logoutUser(): firebase.Promise<void> {
+	logoutUser(): Promise<void> {
 	  firebase.database().ref('/userProfile')
 	    .child(firebase.auth().currentUser.uid).off();
 	  return firebase.auth().signOut();

@@ -26,7 +26,7 @@ export class ProfileProvider {
 	  });
 	}
 
-	updateName(firstName: string, lastName: string): firebase.Promise<any> {
+	updateName(firstName: string, lastName: string): Promise<any> {
 	  return firebase.database().ref('/userProfile')
 	  .child(firebase.auth().currentUser.uid).update({
 	    firstName: firstName,
@@ -34,14 +34,14 @@ export class ProfileProvider {
 	  });
 	}	
 
-	updateDOB(birthDate: string): firebase.Promise<any> {
+	updateDOB(birthDate: string): Promise<any> {
 	  return firebase.database().ref('/userProfile')
 	  .child(firebase.auth().currentUser.uid).update({
 	    birthDate: birthDate,
 	  });
 	}
 
-	updateEmail(newEmail: string, password: string): firebase.Promise<any> {
+	updateEmail(newEmail: string, password: string): Promise<any> {
 	    const credential =  firebase.auth.EmailAuthProvider
 	        .credential(firebase.auth().currentUser.email, password);
 
@@ -54,7 +54,7 @@ export class ProfileProvider {
 	  });
 	}
 
-	updatePassword(newPass: string, oldPassword: string): firebase.Promise<any> {
+	updatePassword(newPass: string, oldPassword: string): Promise<any> {
 	    const credential =  firebase.auth.EmailAuthProvider
 	        .credential(firebase.auth().currentUser.email, oldPassword);
 
@@ -73,7 +73,7 @@ export class ProfileProvider {
 	}
 
 
-  updateProfileImage(imageData): firebase.Promise<any> {
+  updateProfileImage(imageData): Promise<any> {
    let userId = firebase.auth().currentUser.uid;
    return firebase.storage().ref('/profileImages/').child(userId).child('profilePicture.png')
    	.putString(imageData, 'base64', {contentType: 'image/png'})
