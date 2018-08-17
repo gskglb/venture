@@ -5,6 +5,7 @@ import { EmailValidator } from '../../validators/email';
 import { AuthProvider } from '../../providers/auth/auth';
 import { HomePage } from '../home/home';
 import { UserDataProvider } from '../../providers/user-data/user-data';
+import { TabsPage } from '../tabs/tabs';
 /**
  * Generated class for the LoginPage page.
  *
@@ -31,8 +32,8 @@ export class SignInPage {
 		public formBuilder: FormBuilder,
 		public userDataProvider : UserDataProvider) {
 	    this.loginForm = formBuilder.group({
-	      email: ['', Validators.compose([Validators.required, EmailValidator.isValid])],
-	      password: ['', Validators.compose([Validators.minLength(6),Validators.required])]
+	      email: ['guru4raj@gmail.com', Validators.compose([Validators.required, EmailValidator.isValid])],
+	      password: ['test123', Validators.compose([Validators.minLength(6),Validators.required])]
 	    });
 	}
 
@@ -48,7 +49,7 @@ export class SignInPage {
 	    .then( authData => {
 	      this.loading.dismiss().then( () => {
 	      	this.userDataProvider.login(authData.displayName? authData.displayName : authData.email);
-	        this.navCtrl.setRoot(HomePage);
+	        this.navCtrl.setRoot("tabs");
 	      });
 	    }, error => {
 	      this.loading.dismiss().then( () => {

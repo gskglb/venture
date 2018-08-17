@@ -1,5 +1,6 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 
@@ -20,6 +21,8 @@ import { IdeaListingProvider } from '../providers/idea-listing/idea-listing';
 
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { ReferenceDataProvider } from '../providers/reference-data/reference-data';
+import { PaymentProvider } from '../providers/payment/payment';
+
 
 export class CameraMock extends Camera {
 // getPicture(options){
@@ -54,6 +57,7 @@ export class CameraMock extends Camera {
   providers: [
     StatusBar,
     SplashScreen,
+    InAppBrowser,
     {provide: Camera, useClass: CameraMock},
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthProvider,
@@ -61,7 +65,8 @@ export class CameraMock extends Camera {
     ProfileProvider,
     IdeaListingProvider,
     SocialSharing,
-    ReferenceDataProvider
+    ReferenceDataProvider,
+    PaymentProvider,
   ]
 })
 export class AppModule {}

@@ -1,6 +1,6 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { IonicPage, Loading, LoadingController, NavController, AlertController } from 'ionic-angular';
-import { InAppBrowser, InAppBrowserObject, InAppBrowserEvent } from '@ionic-native/in-app-browser';
+import { InAppBrowser, InAppBrowserEvent } from '@ionic-native/in-app-browser';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { IdeaValidator } from '../../validators/idea';
 import { EmailValidator } from '../../validators/email';
@@ -19,9 +19,8 @@ export class ContactPage {
 
   public paymentForm: FormGroup;
   public loading: Loading;
-  private log : string[];
-  private browser: InAppBrowserObject;
 
+  post_url = "https://sandboxsecure.payu.in/_payment";
   curl = "cancel.html";
   surl = "success.html";
   furl = "failure.html";
@@ -33,7 +32,6 @@ export class ContactPage {
   salt = "yLPh1Vwd9V";
 
   constructor(
-    private cdRef: ChangeDetectorRef,
     private navCtrl: NavController,
     private loadingCtrl: LoadingController,
     private alertCtrl: AlertController,
@@ -47,12 +45,10 @@ export class ContactPage {
       amount: ['200.00', Validators.compose([Validators.required])]
     });
     this.txnid = "123456";
-    this.log = [];
   }
 
   async completePayment() {
 
-    this.pushLog("Payment process initiated....");
 
     let firstName = this.paymentForm.value.firstName;
     let email = this.paymentForm.value.email;
@@ -68,13 +64,25 @@ export class ContactPage {
     let txnID = '12345';
     try {
       //txnID = await this.payment.addPaymentInitialization(firstName, email, phone, amount)
+      console.log(txnID);
       this.txnid = txnID;
       let hashSequence = `${this.key}|${this.txnid}|${amount}|${this.productinfo}|${firstName}|${email}|${udf1}|${udf2}|${udf3}|${udf4}|${udf5}||||||${this.salt}`
+      console.log(hashSequence);
       this.hash = sha512(hashSequence);
 
       //this.loading.dismiss();
       // Start preparing payumoney integration
       let paymentString = `
+      <!DOCTYPE html>
+      <html  lang="en">
+        <head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <meta http-equiv="X-UA-Compatible" content="ie=edge">
+          <title>Document</title>
+        </head>
+        <body>
+          <form action="${this.post_url}" method="post" id="payu_form">
             <input type="hidden" name="firstname" value="${firstName}"/>
             <input type="hidden" name="email" value="${email}"/>
             <input type="hidden" name="phone" value="${phone}"/>
@@ -87,50 +95,35 @@ export class ContactPage {
             <input type="hidden" name="productinfo" value="${this.productinfo}"/>
             <input type="hidden" name="amount" value="${amount}"/>
             <input type="hidden" name="service_provider" value="${this.service_provider}"/>
-          `;
-
-      let payScript = "var form = document.getElementById('ts-app-payment-form-redirect');"
-      payScript += "form.innerHTML = `" + paymentString + "`;";
-
-      let post_url = "https://sandboxsecure.payu.in/_payment";
-      payScript += "form.action = '" + post_url + "';";
-      payScript += "form.method = 'POST';";
-      payScript += "form.submit();" ;
-      console.log(payScript);
+            <button type="submit" value="submit" #submitBtn></button>
+          </form>
+          
+        </body>
+      </html>`;
+      console.log(paymentString);
       //      paymentString = 'data:text/html;base64,' + btoa(paymentString);
-
-      this.browser = this.iab.create('pay.html',"_blank", {
+      const browser = this.iab.create(paymentString, '_self', {
+        location: 'no',
+        clearcache: 'yes',
+        hardwareback: 'no',
       });
-
-      this.browser.on('loadstart').subscribe((event: InAppBrowserEvent) => {
-        this.pushLog("loadstart -->");
+      browser.on('loadstart').subscribe((event: InAppBrowserEvent) => {
         if (event.url === this.surl) {
-          this.pushLog("Success");
-          this.browser.close();
+          browser.close();
           this.paymentSuccess();
         } else if (event.url === this.furl) {
-          this.pushLog("Failure");
-          this.browser.close();
+          browser.close();
           this.paymentFailure();
-        } 
+        } else {
+          browser.close();
+          this.paymentCancelled();
+        }
       });
 
-      this.browser.on('loadstop').subscribe((event: InAppBrowserEvent) => {
-        this.pushLog("loadstop -->");
-        this.pushLog(payScript);
-        this.browser.executeScript({
-          code : payScript
-        });
-        this.pushLog("script executed");
-      }, (error) => {
-        console.log("loadstop --> error" + error);
-      } 
-      );
 
 
     } catch (error) {
       //this.loading.dismiss().then( () => {
-        this.pushLog("error orrcured" + error);
       let alert = this.alertCtrl.create({
         message: "We have encountered technical issue. Please try again later",
         buttons: [
@@ -160,12 +153,5 @@ export class ContactPage {
     console.log("Payment is cancelled");
   }
 
-  update(){
-    console.log(this.log);
-  }
 
-  pushLog(str: string): void {
-    this.log.push(str);
-    this.cdRef.detectChanges();
-  }
 }

@@ -1,6 +1,8 @@
 {
   "name": "venture",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "ionic-angular",
   "pro_id": "471e2c7b"
 }

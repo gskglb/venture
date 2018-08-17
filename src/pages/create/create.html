@@ -8,8 +8,7 @@
   <form [formGroup]="ideaCreateForm" (submit)="createIdea()" novalidate>
     <ion-item>
       <ion-label stacked>Summary of your idea</ion-label>
-      <ion-textarea formControlName="title" type="text" [class.invalid]="!ideaCreateForm.controls.title.valid && ideaCreateForm.controls.title.dirty" rows=3
-      placeholder="define problem that you think your idea will solve">
+      <ion-textarea formControlName="title" type="text" [class.invalid]="!ideaCreateForm.controls.title.valid && ideaCreateForm.controls.title.dirty" rows=3>
       </ion-textarea>
     </ion-item>
     <ion-item class="error-message" 
@@ -19,8 +18,7 @@
 
     <ion-item>
       <ion-label stacked>Description of your idea</ion-label>
-      <ion-textarea formControlName="description" type="text" [class.invalid]="!ideaCreateForm.controls.description.valid && ideaCreateForm.controls.description.dirty" rows=5
-      placeholder="explain how part here. Make sure to quote exat details">
+      <ion-textarea formControlName="description" type="text" [class.invalid]="!ideaCreateForm.controls.description.valid && ideaCreateForm.controls.description.dirty" rows=5>
       </ion-textarea>
     </ion-item>
     <ion-item class="error-message" 
@@ -31,7 +29,6 @@
     <ion-item>
       <ion-label stacked>Unique selling point (USP) </ion-label>
       <ion-textarea formControlName="description" type="text" [class.invalid]="!ideaCreateForm.controls.description.valid && ideaCreateForm.controls.description.dirty" rows=5
-      placeholder="unique selling point (USP) is the factor that makes a company or a product stand out from its competitors, whether it is through pricing, quality, customer service or innovation."
       >
       </ion-textarea>
     </ion-item>

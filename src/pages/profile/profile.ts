@@ -5,6 +5,7 @@ import { AuthProvider } from '../../providers/auth/auth';
 import { UserDataProvider } from '../../providers/user-data/user-data';
 import { Camera } from '@ionic-native/camera';
 import { HomePage } from '../home/home';
+import { SignInPage } from '../sign-in/sign-in';
 import { IdeaListingProvider } from '../../providers/idea-listing/idea-listing';
 /**
  * Generated class for the ProfilePage page.
@@ -67,7 +68,7 @@ export class ProfilePage {
   logOut(){
     this.authProvider.logoutUser().then(() => {
       this.userDataProvider.logout();
-      this.navCtrl.setRoot(HomePage);
+      this.navCtrl.setRoot(SignInPage);
     });
   }
 

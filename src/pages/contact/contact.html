@@ -1,13 +1,64 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Preferences
+      Payment Test
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
-  <ion-list>
-    <ion-list-header>Work in progress</ion-list-header>
-  </ion-list>
+  <form [formGroup]="paymentForm" (submit)="completePayment()" novalidate>
+    <ion-item>
+      <ion-label stacked>First Name *</ion-label>
+      <ion-input formControlName="firstName" type="text" [class.invalid]="!paymentForm.controls.firstName.valid && paymentForm.controls.firstName.dirty"
+        rows=3>
+      </ion-input>
+    </ion-item>
+    <ion-item class="error-message" *ngIf="!paymentForm.controls.firstName.valid  && paymentForm.controls.firstName.dirty">
+      <p>First name is required</p>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Email *</ion-label>
+      <ion-input formControlName="email" type="text" [class.invalid]="!paymentForm.controls.email.valid && paymentForm.controls.email.dirty"
+        rows=3>
+      </ion-input>
+    </ion-item>
+    <ion-item class="error-message" *ngIf="!paymentForm.controls.email.valid  && paymentForm.controls.email.dirty">
+      <p>Email is required</p>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Phone *</ion-label>
+      <ion-input formControlName="phone" type="text" [class.invalid]="!paymentForm.controls.phone.valid && paymentForm.controls.phone.dirty"
+        rows=3>
+      </ion-input>
+    </ion-item>
+    <ion-item class="error-message" *ngIf="!paymentForm.controls.phone.valid  && paymentForm.controls.phone.dirty">
+      <p>Phone number is required</p>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Amount (INR) *</ion-label>
+      <ion-input formControlName="amount" type="text" [class.invalid]="!paymentForm.controls.amount.valid && paymentForm.controls.amount.dirty"
+        rows=3>
+      </ion-input>
+    </ion-item>
+    <ion-item class="error-message" *ngIf="!paymentForm.controls.amount.valid  && paymentForm.controls.amount.dirty">
+      <p>Amount is required</p>
+    </ion-item>
+    <ion-item no-lines>
+      <button ion-button block type="submit" [disabled]="!paymentForm.valid">
+        Pay INR {{paymentForm.controls.amount.value}}
+      </button>
+    </ion-item>
+
+  </form>
+  <div class="container">
+  <h2 (click)="update()">Log of events {{ log.length }}</h2>
+
+  <div class="console">
+    <p *ngFor="let line of log; index as i;" [innerHTML]="i + '. ' + line"></p>
+  </div>
+</div>
 </ion-content>
