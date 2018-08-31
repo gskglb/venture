@@ -1,0 +1,32 @@
+<ion-content scroll="false">
+    <section class="login-container">
+        <div class="col header text-center">
+            <img src="assets/img/logo.png" class="logo" />
+        </div>
+        <form [formGroup]="phoneLoginForm" (submit)="signIn()" novalidate>
+            <div class="col button-row text-center">
+                <div class="error-message" *ngIf="!phoneLoginForm.controls.phoneNumber.valid && phoneLoginForm.controls.phoneNumber.dirty">
+                    <p>Please enter valid phone number with country code (without +).</p>
+                </div>
+                <ion-item>
+                    <ion-input formControlName="phoneNumber" type="number" placeholder='Mobile number (Ex: 91xxxxxxxxxx)' [class.invalid]="!phoneLoginForm.controls.phoneNumber.valid && phoneLoginForm.controls.phoneNumber.dirty">
+                    </ion-input>
+                </ion-item>
+                <div class="info-message" *ngIf="smssent">
+                    <p>SMS sent to your phone.</p>
+                </div>
+    
+            </div>
+            <div class="col text-center">
+                <div id="recaptcha-container"></div>
+            </div>
+            <div class="col button-row text-center">
+                <button ion-button type="submit" [disabled]="!phoneLoginForm.controls.phoneNumber.valid">Request OTP</button>
+            </div>
+
+        </form>
+        <div class="col text-center">
+            Login using email ID <strong><a href="#">here !</a></strong>
+        </div>
+    </section>
+</ion-content>

@@ -4,39 +4,30 @@ import { ViewChild } from '@angular/core';
 import { Slides } from 'ionic-angular';
 import { Component, trigger, transition, style, state, animate, keyframes } from '@angular/core';
 
+
+
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html',
-  animations: [
-
-    trigger('bounce', [
-      state('*', style({
-        transform: 'translateX(0)'
-      })),
-      transition('* => rightSwipe', animate('700ms ease-out', keyframes([
-        style({ transform: 'translateX(0)', offset: 0 }),
-        style({ transform: 'translateX(-65px)', offset: 0.3 }),
-        style({ transform: 'translateX(0)', offset: 1.0 })
-      ]))),
-      transition('* => leftSwipe', animate('700ms ease-out', keyframes([
-        style({ transform: 'translateX(0)', offset: 0 }),
-        style({ transform: 'translateX(65px)', offset: 0.3 }),
-        style({ transform: 'translateX(0)', offset: 1.0 })
-      ])))
-    ])
-  ]
 })
+
 export class HomePage {
   @ViewChild(Slides) slides: Slides;
 
   public skipMsg: string = "Skip Intro";
 
   constructor(
-    public navCtrl: NavController,
+    private navCtrl: NavController,
+    
   ) {
 
-
   }
+
+	ionViewDidLoad() {
+    
+  }
+
 
   goToLogIn() {
     this.navCtrl.push('sign-in');

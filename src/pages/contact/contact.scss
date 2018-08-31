@@ -4,7 +4,11 @@ page-contact {
       display: flex;
       flex-direction: column;
     }
-  
+    .scontainer {
+      height: 40%;
+      display: flex;
+      flex-direction: column;
+    }  
     .console {
       background: map-get($colors, light);
       color: map-get($colors, dark);

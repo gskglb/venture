@@ -1,0 +1,36 @@
+<ion-content>
+  <ion-slides pager (ionSlideDidChange)="slideChanged()" (ionSlideDrag)="slideMoved()">
+
+    <ion-slide style="background: rgba(219, 10, 10, 0.904);background-size: 1800% 1800%;">
+      <div class="diag" style="background: url('assets/img/whitebg.svg')  no-repeat">
+        <ion-icon ios="ios-analytics" md="md-analytics" color="primary" [@bounce]='state' (@bounce.done)="animationDone($event)"></ion-icon>
+      
+      </div>
+      <div [@bounce]='state'>
+        <h2>Have an awesome idea?</h2>
+        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+      </div>
+    </ion-slide>
+
+    <ion-slide style="background: rgba(219, 10, 10, 0.904);background-size: 1800% 1800%;">
+      <div class="diag" style="background: url('assets/img/whitebg.svg') no-repeat">
+        <ion-icon ios="ios-trophy" md="md-trophy" color="primary" [@bounce]='state' (@bounce.done)="animationDone($event)"></ion-icon>
+      </div>
+      <div [@bounce]='state'>
+        <h2>something more</h2>
+        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
+      </div>
+    </ion-slide>
+
+    <ion-slide style="background: rgba(219, 10, 10, 0.904);background-size: 1800% 1800%;">
+      <div class="diag" style="background: url('assets/img/whitebg.svg') no-repeat">
+        <ion-icon ios="ios-chatboxes" md="md-chatboxes" color="primary" [@bounce]='state' (@bounce.done)="animationDone($event)"></ion-icon>
+      </div>
+      <div [@bounce]='state'>
+        <h2>something else</h2>
+        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
+      </div>
+    </ion-slide>
+  </ion-slides>
+  <button (click)="skip()" id="skip">{{ skipMsg }}</button>
+</ion-content>

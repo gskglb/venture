@@ -4,16 +4,21 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { TabsPage } from '../pages/tabs/tabs';
-import { HomePage } from '../pages/home/home';
+import { FirstTimePage } from '../pages/first-time/first-time';
+import { Storage } from '@ionic/storage';
 import  firebase  from 'firebase';
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = HomePage;
+  rootPage:any;
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
+  constructor(
+    private platform: Platform, 
+    private statusBar: StatusBar, 
+    private splashScreen: SplashScreen,
+    private storage: Storage) {
     
     firebase.initializeApp({
       apiKey: "AIzaSyCVdX0iNCBUUd08SQLJmCrWcgjKuo__q_s",
@@ -29,7 +34,18 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
       splashScreen.hide();
+      console.log('reading');
+      this.storage.get('phone').then((val) => {
+        console.log(val);
+        if (val === null){
+          this.rootPage = FirstTimePage
+          //this.storage.set('phone', '9704038269');
 
+        } else {
+          this.rootPage = TabsPage
+        }
+        
+      });      
     });
   }
 }

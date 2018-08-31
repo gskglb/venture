@@ -22,9 +22,9 @@ export class ContactPage {
   private log : string[];
   private browser: InAppBrowserObject;
 
-  curl = "cancel.html";
-  surl = "success.html";
-  furl = "failure.html";
+  curl = "http://rediff.com";
+  surl = "http://google.co.in";
+  furl = "http://yahoo.com";
   key = "0iwyFROJ";
   hash = "";
   txnid = "123456";
@@ -96,32 +96,33 @@ export class ContactPage {
       payScript += "form.action = '" + post_url + "';";
       payScript += "form.method = 'POST';";
       payScript += "form.submit();" ;
-      console.log(payScript);
       //      paymentString = 'data:text/html;base64,' + btoa(paymentString);
 
       this.browser = this.iab.create('pay.html',"_blank", {
+        location : 'no'
       });
 
       this.browser.on('loadstart').subscribe((event: InAppBrowserEvent) => {
-        this.pushLog("loadstart -->");
-        if (event.url === this.surl) {
-          this.pushLog("Success");
+        this.pushLog("Loading " + event.url);
+        if (event.url.includes(this.surl)) {
+          this.pushLog("Payment Success");
           this.browser.close();
           this.paymentSuccess();
-        } else if (event.url === this.furl) {
-          this.pushLog("Failure");
+        } else if (event.url.includes(this.furl)) {
+          this.pushLog("Payment Failure");
+          this.browser.close();
+          this.paymentFailure();
+        } else if (event.url.includes(this.curl)) {
+          this.pushLog("Payment Cancelled");
           this.browser.close();
           this.paymentFailure();
         } 
       });
 
       this.browser.on('loadstop').subscribe((event: InAppBrowserEvent) => {
-        this.pushLog("loadstop -->");
-        this.pushLog(payScript);
         this.browser.executeScript({
           code : payScript
         });
-        this.pushLog("script executed");
       }, (error) => {
         console.log("loadstop --> error" + error);
       } 
@@ -149,19 +150,19 @@ export class ContactPage {
   }
 
   paymentSuccess() {
-    console.log("Payment is successful");
+    this.pushLog("Payment is processed");
   }
 
   paymentFailure() {
-    console.log("Payment is failure");
+    this.pushLog("Payment is failured");
   }
 
   paymentCancelled() {
-    console.log("Payment is cancelled");
+    this.pushLog("Payment is cancelled");
   }
 
-  update(){
-    console.log(this.log);
+  clearLog(){
+    this.log = [];
   }
 
   pushLog(str: string): void {

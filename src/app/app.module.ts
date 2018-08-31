@@ -5,6 +5,8 @@ import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 
 import { HomePage } from '../pages/home/home';
+import { TabsPage } from '../pages/tabs/tabs';
+import { FirstTimePage }from '../pages/first-time/first-time';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
@@ -39,7 +41,8 @@ export class CameraMock extends Camera {
   declarations: [
     MyApp,
     HomePage,
-
+    TabsPage,
+    FirstTimePage
   ],
   imports: [
     BrowserModule,
@@ -52,7 +55,8 @@ export class CameraMock extends Camera {
   entryComponents: [
     MyApp,
     HomePage,
-
+    TabsPage,
+    FirstTimePage
   ],
   providers: [
     StatusBar,
